@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MovieApp.Models.Rental>
+
+@{
+    ViewData["Title"] = "Overdue Rentals";
+}
+
+<h1>Overdue Rentals</h1>
+
+<p>
+    <a asp-action="Index" class="btn btn-secondary">Back to All Rentals</a>
+</p>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-success">No overdue rentals. Great job!</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Movie</th>
+                <th>Due On</th>
+                <th>Days Overdue</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rental in Model)
+            {
+                var daysOverdue = (DateTime.Now - rental.DueOn).Days;
+                <tr>
+                    <td>@rental.Customer?.FullName</td>
+                    <td>@rental.Customer?.PhoneNumber</td>
+                    <td>@rental.Movie?.Title</td>
+                    <td>@rental.DueOn.ToShortDateString()</td>
+                    <td><span class="text-danger fw-bold">@daysOverdue days</span></td>
+                    <td>
+                        <a asp-action="Return" asp-route-id="@rental.Id" class="btn btn-sm btn-success">Return</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

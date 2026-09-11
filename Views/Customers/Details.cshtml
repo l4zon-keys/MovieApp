@@ -1,0 +1,66 @@
+﻿@model MovieApp.Models.Customer
+
+@{
+    ViewData["Title"] = "Customer Details";
+}
+
+<h1>@Model.FullName</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.PhoneNumber)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(m => m.PhoneNumber)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Email)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(m => m.Email)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.JoinedOn)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(m => m.JoinedOn)</dd>
+</dl>
+
+<h2>Rental History</h2>
+
+@if (!Model.Rentals.Any())
+{
+    <p><em>No rentals yet.</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Movie</th>
+                <th>Rented On</th>
+                <th>Due On</th>
+                <th>Returned On</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rental in Model.Rentals.OrderByDescending(r => r.RentedOn))
+            {
+                <tr>
+                    <td>@rental.Movie?.Title</td>
+                    <td>@rental.RentedOn.ToShortDateString()</td>
+                    <td>@rental.DueOn.ToShortDateString()</td>
+                    <td>@(rental.ReturnedOn?.ToShortDateString() ?? "—")</td>
+                    <td>
+                        @if (rental.IsReturned)
+                        {
+                            <span class="text-success">Returned</span>
+                        }
+                        else if (rental.IsOverdue)
+                        {
+                            <span class="text-danger">Overdue</span>
+                        }
+                        else
+                        {
+                            <span class="text-warning">Out</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>

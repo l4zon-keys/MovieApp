@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MovieApp.Models.Movie>
+
+@{
+    ViewData["Title"] = "DVD Inventory";
+}
+
+<h1>DVD Inventory</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New DVD</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.Title)</th>
+            <th>@Html.DisplayNameFor(m => m.Genre)</th>
+            <th>@Html.DisplayNameFor(m => m.ReleaseYear)</th>
+            <th>@Html.DisplayNameFor(m => m.Rating)</th>
+            <th>@Html.DisplayNameFor(m => m.QuantityInStock)</th>
+            <th>@Html.DisplayNameFor(m => m.Price)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(m => movie.Title)</td>
+                <td>@Html.DisplayFor(m => movie.Genre)</td>
+                <td>@Html.DisplayFor(m => movie.ReleaseYear)</td>
+                <td>@Html.DisplayFor(m => movie.Rating)</td>
+                <td>@Html.DisplayFor(m => movie.QuantityInStock)</td>
+                <td>@Html.DisplayFor(m => movie.Price)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@movie.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@movie.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@movie.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

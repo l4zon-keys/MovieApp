@@ -1,0 +1,28 @@
+﻿@model MovieApp.Models.Rental
+
+@{
+    ViewData["Title"] = "Return Rental";
+}
+
+<h1>Return Rental</h1>
+<h3>Are you sure you want to mark this rental as returned?</h3>
+
+<dl class="row">
+    <dt class="col-sm-3">Customer</dt>
+    <dd class="col-sm-9">@Model.Customer?.FullName</dd>
+
+    <dt class="col-sm-3">Movie</dt>
+    <dd class="col-sm-9">@Model.Movie?.Title</dd>
+
+    <dt class="col-sm-3">Rented On</dt>
+    <dd class="col-sm-9">@Model.RentedOn.ToShortDateString()</dd>
+
+    <dt class="col-sm-3">Due On</dt>
+    <dd class="col-sm-9">@Model.DueOn.ToShortDateString()</dd>
+</dl>
+
+<form asp-action="Return">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-success">Mark as Returned</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

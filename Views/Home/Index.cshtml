@@ -1,0 +1,100 @@
+﻿@model MovieApp.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1>DVD Shop Dashboard</h1>
+
+<div class="row mt-4">
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-primary">
+            <div class="card-body">
+                <h5 class="card-title">Movies</h5>
+                <p class="card-text display-4">@Model.TotalMovies</p>
+                <small>@Model.TotalCopies total copies</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-warning">
+            <div class="card-body">
+                <h5 class="card-title">Copies Out</h5>
+                <p class="card-text display-4">@Model.CopiesOut</p>
+                <small>Currently rented</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-danger">
+            <div class="card-body">
+                <h5 class="card-title">Overdue</h5>
+                <p class="card-text display-4">@Model.OverdueRentals</p>
+                <small>Past due date</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-info">
+            <div class="card-body">
+                <h5 class="card-title">Active Customers</h5>
+                <p class="card-text display-4">@Model.ActiveCustomers</p>
+                <small>@Model.TotalCustomers total customers</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2>Recent Rentals</h2>
+
+@if (!Model.RecentRentals.Any())
+{
+    <p><em>No rentals yet.</em></p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Movie</th>
+                <th>Rented On</th>
+                <th>Due On</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rental in Model.RecentRentals)
+            {
+                <tr>
+                    <td>@rental.Customer?.FullName</td>
+                    <td>@rental.Movie?.Title</td>
+                    <td>@rental.RentedOn.ToShortDateString()</td>
+                    <td>@rental.DueOn.ToShortDateString()</td>
+                    <td>
+                        @if (rental.IsReturned)
+                        {
+                            <span class="text-success">Returned</span>
+                        }
+                        else if (rental.IsOverdue)
+                        {
+                            <span class="text-danger">Overdue</span>
+                        }
+                        else
+                        {
+                            <span class="text-warning">Out</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<div class="mt-3">
+    <a asp-controller="Rentals" asp-action="Index" class="btn btn-primary">View All Rentals</a>
+    <a asp-controller="Rentals" asp-action="Overdue" class="btn btn-danger">View Overdue</a>
+</div>

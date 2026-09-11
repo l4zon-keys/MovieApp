@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MovieApp.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customers";
+   
+}
+<partial name="_Alert" />
+
+<h1>Customers</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New Customer</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.FullName)</th>
+            <th>@Html.DisplayNameFor(m => m.PhoneNumber)</th>
+            <th>@Html.DisplayNameFor(m => m.Email)</th>
+            <th>@Html.DisplayNameFor(m => m.JoinedOn)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(m => customer.FullName)</td>
+                <td>@Html.DisplayFor(m => customer.PhoneNumber)</td>
+                <td>@Html.DisplayFor(m => customer.Email)</td>
+                <td>@Html.DisplayFor(m => customer.JoinedOn)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@customer.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@customer.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@customer.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,24 @@
+﻿@model MovieApp.Models.Movie
+
+@{
+    ViewData["Title"] = "DVD Details";
+}
+
+<h1>@Model.Title</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Genre)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(m => m.Genre)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.ReleaseYear)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(m => m.ReleaseYear)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Rating)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(m => m.Rating)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(m => m.QuantityInStock)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(m => m.QuantityInStock)</dd>
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
