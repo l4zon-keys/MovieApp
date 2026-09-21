@@ -1,3 +1,4 @@
+<img width="1892" height="902" alt="image" src="https://github.com/user-attachments/assets/3aa5d0c8-f5cf-40fd-af6d-b4edf899c1e6" />
 MovieApp — DVD Rental Shop Management System
 A full-stack web application built with ASP.NET Core MVC to help a small-town DVD rental shop manage its inventory, customers, and rentals. What started as a learning project grew into a practical business tool with real authentication, business rules, and a modern UI.
 
