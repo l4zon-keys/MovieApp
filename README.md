@@ -71,7 +71,6 @@ Email: admin@movieshop.local
 
 Password: Admin123!
 
-⚠️ Change this immediately in any deployed environment. See Data/DbSeeder.cs.
 
 
 The biggest lesson: architecture decisions made early compound, and refactoring later is painful. Building the service layer and ViewModels before adding UI complexity made the later phases much easier.
